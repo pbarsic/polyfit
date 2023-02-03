@@ -8,6 +8,33 @@ def fit_cubic(xyvals: np.ndarray, pythonic=True):
     else:
         return fit_clike(xyvals[:, 0], xyvals[:, 1])
 
+# this is a more efficient version that takes advantage
+# of inherent vectorization in matrix multiplications
+def fit_vectorized(xyvals: np.ndarray, degree: int=2):
+    ndims = degree+1
+    npoints = xyvals.shape[0]
+    M = np.zeros([ndims, ndims])
+    y = np.zeros(ndims)
+
+    pre_sums = np.zeros([ndims, npoints])
+    for ii in range(ndims):
+        for jj in range(npoints):
+            pre_sums[ii,jj] = xyvals[jj, 0] ** ii
+
+    M = np.matmul(pre_sums , pre_sums.T)
+
+    y = np.matmul(pre_sums, xyvals[:,1])
+
+    polycoeffs = np.matmul(np.linalg.inv(M), y)
+
+    print("fit_vectorized")
+    print(f"M:\n{M}")
+    print(f"Y:\n{y}")
+    print(f"data column sums: {np.sum(xyvals, axis=0)}")
+    print(f"   check values: {np.matmul(M, polycoeffs)}")
+    print(f"expected values: {y}")
+    return polycoeffs
+
 
 def fit_pythonic(xyvals: np.ndarray):
     M = np.zeros([3, 3])
@@ -25,6 +52,7 @@ def fit_pythonic(xyvals: np.ndarray):
 
     polycoeffs = np.matmul(np.linalg.inv(M), y)
 
+    print("fit_pythonic")
     print(f"M:\n{M}")
     print(f"Y:\n{y}")
     print(f"data column sums: {np.sum(xyvals, axis=0)}")
@@ -50,6 +78,7 @@ def fit_clike(xvalues, yvalues, degree=2):
 
     polycoeffs = np.matmul(np.linalg.inv(M), y)
 
+    print("fit_clike")
     print(f"M:\n{M}")
     print(f"Y:\n{y}")
     print(f"data column sums: {np.sum(xvalues)} {np.sum(yvalues)}")
@@ -76,6 +105,7 @@ if __name__ == "__main__":
 
     fit_p = fit_cubic(xyvals, True)
     fit_values = fit_cubic(xyvals, False)
+    fit_values = fit_vectorized(xyvals)
     print(f"Fit values: {fit_values}")
     print(f"Expected values: {a}, {b}, {c}")
     yfit = y_known(fit_values[0], fit_values[1], fit_values[2], xvals)
