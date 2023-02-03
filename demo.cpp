@@ -19,8 +19,9 @@ int main() {
   std::vector<double> fit_coeffs;
   std::vector<cv::Point2d> model_points;
   std::vector<cv::Point2d> clean_points;
+  int num_points = 10;
 
-  for (int i = 0; i < 10; i++) {
+  for (int i = 0; i < num_points; i++) {
     xpoints.push_back(xmin + i * xdelta);
   }
 
@@ -41,11 +42,15 @@ int main() {
   make_poly(xpoints, fit_coeffs, std, &model_points);
 
   std::cout << "x, y(x) + noise, y(x), fit(x)" << std::endl;
+  float error = 0;
   for (int ii = 0; ii < xpoints.size(); ii++) {
     std::cout << xpoints.at(ii) << ", " << xypoints.at(ii).y << ", "
               << clean_points.at(ii).y << ", " << model_points.at(ii).y
               << std::endl;
+    error += pow((model_points.at(ii).y - clean_points.at(ii).y), 2);
   }
+  error = pow(error / static_cast<double>(num_points), 0.5);
+  std::cout << "Standar deviation: " << error << std::endl;
 
   return 0;
 }
