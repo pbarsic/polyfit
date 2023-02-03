@@ -5,7 +5,6 @@
 #include "polyfit.hpp"
 
 int main() {
-
   // application to demonstrate the polynomial fit
   // and also provide the amount of time to compute
   int npts = 100;
@@ -50,7 +49,7 @@ int main() {
     error += pow((model_points.at(ii).y - clean_points.at(ii).y), 2);
   }
   error = pow(error / static_cast<double>(num_points), 0.5);
-  std::cout << "Standar deviation: " << error << std::endl;
+  std::cout << "RMS error (fit vs. clean): " << error << std::endl;
 
   return 0;
 }

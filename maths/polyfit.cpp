@@ -9,7 +9,6 @@
  */
 void polyfit(std::vector<cv::Point2d> &xypoints,
              std::vector<double> *polycoeffs, int degree = 2) {
-
   int num_points = xypoints.size();
   int num_dims = degree + 1;
 

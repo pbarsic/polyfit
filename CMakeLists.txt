@@ -11,14 +11,14 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 add_executable(polyfit_demo demo.cpp)
 add_executable(simplecv simpleCV.cpp)
 
-add_subdirectory(math)
+add_subdirectory(maths)
 
 find_package(PkgConfig REQUIRED)
 
 pkg_check_modules(OPENCV REQUIRED opencv)
 
 target_link_libraries(polyfit_demo Math ${OPENCV_LIBRARIES})
-target_include_directories(polyfit_demo PUBLIC ${OPENCV_INCLUDE_DIRS} math)
+target_include_directories(polyfit_demo PUBLIC ${OPENCV_INCLUDE_DIRS} maths)
 target_compile_options(polyfit_demo PUBLIC ${OPENCV_CFLAGS_OTHER})
 
 target_link_libraries(simplecv ${OPENCV_LIBRARIES})
