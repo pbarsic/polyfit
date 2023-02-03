@@ -9,7 +9,7 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 add_executable(polyfit_demo demo.cpp)
-add_executable(simplecv SimpleCV.cpp)
+add_executable(simplecv simpleCV.cpp)
 
 add_subdirectory(math)
 

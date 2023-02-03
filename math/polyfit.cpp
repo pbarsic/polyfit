@@ -57,4 +57,3 @@ void make_poly(std::vector<double> &xpoints, std::vector<double> coeffs,
     xypoints->push_back(cv::Point2d(xvalue, yvalue));
   }
 }
-

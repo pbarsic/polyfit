@@ -23,8 +23,7 @@ int main() {
   make_poly(xpoints, input_coeffs, 0, &clean_points);
 
   polyfit(xypoints, &fit_coeffs);
-  make_poly(xpoints, fit_coeffs, std,
-            &model_points);
+  make_poly(xpoints, fit_coeffs, std, &model_points);
 
   std::cout << "x, y(x) + noise, y(x), fit(x)" << std::endl;
   for (int ii = 0; ii < xpoints.size(); ii++) {

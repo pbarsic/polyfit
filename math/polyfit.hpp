@@ -7,7 +7,7 @@
  * @param degree: highest degree of fit polynomial, defaults to quadratic
  */
 void polyfit(std::vector<cv::Point2d> &xypoints,
-             std::vector<double> *polycoeffs, int degree = 2) ;
+             std::vector<double> *polycoeffs, int degree = 2);
 
 /*
  * \brief make a polynomial with Gaussian noise
@@ -18,4 +18,4 @@ void polyfit(std::vector<cv::Point2d> &xypoints,
  * Output vector of (x, y(x))
  */
 void make_poly(std::vector<double> &xpoints, std::vector<double> coeffs,
-               double std, std::vector<cv::Point2d> *xypoints) ;
+               double std, std::vector<cv::Point2d> *xypoints);
